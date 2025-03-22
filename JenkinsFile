@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tools {
+        nodejs 'NodeJS'
+    }
 
     stages {
         stage('GitHub') {
@@ -7,6 +10,13 @@ pipeline {
                 git branch: 'main', credentialsId: 'Token_DIND', url: 'https://github.com/harkamalsingh1313/Devops-ECR-ECS.git'
             }
         }
+
+        stage('Install and Test') {  // Missing stage name fixed
+            steps {
+                sh 'npm install'
+                sh 'npm test'
+            }
+        }    
     }
 }
 
