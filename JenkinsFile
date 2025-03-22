@@ -5,18 +5,22 @@ pipeline {
     }
 
     stages {
-        stage('GitHub') {
+        stage('Checkout Code') {
             steps {
                 git branch: 'main', credentialsId: 'Token_DIND', url: 'https://github.com/harkamalsingh1313/Devops-ECR-ECS.git'
             }
         }
 
-        stage('Install and Test') {  // Missing stage name fixed
+        stage('Install Dependencies') {
             steps {
                 sh 'npm install'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
                 sh 'npm test'
             }
-        }    
+        }
     }
 }
-
